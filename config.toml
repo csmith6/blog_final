@@ -1,13 +1,13 @@
 baseURL = "http://example.com/"
 languageCode = "en-us"
-title = "Minimal"
+title = "Chris Smith's blog"
 theme = "minimal"
 disqusShortname = "username" # delete this to disable disqus comments
 googleAnalytics = ""
 
 [params]
     author = "Calin Tataru"
-    description = "Personal blog theme powered by Hugo"
+    description = "Chris Smith's Data Science Blog"
     githubUsername = "#"
     accent = "red"
     showBorder = true
@@ -42,21 +42,12 @@ googleAnalytics = ""
     weight = 1
 
 [[menu.icon]]
-    url = "https://github.com/username/"
+    url = "https://github.com/csmith6"
     name = "github"
     weight = 2
 
 [[menu.icon]]
-    url = "https://twitter.com/username/"
+    url = "https://twitter.com/C_Smizzle"
     name = "twitter"
     weight = 3
 
-[[menu.icon]]
-    url = "https://www.linkedin.com/in/username/"
-    name = "linkedin"
-    weight = 4
-
-[[menu.icon]]
-    url = "https://www.stackoverflow.com/username/"
-    name = "stack-overflow"
-    weight = 5
