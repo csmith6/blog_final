@@ -1,0 +1,170 @@
+---
+title: Data Viz
+author: Chris Smith
+date: '2017-12-12'
+slug: data-viz
+categories: []
+tags: []
+---
+
+
+
+<p>In R we can create cool data visualizations that represent data in an easy and communicative way. First, we must qurey our data into dataframes with sqldf().</p>
+<pre class="r"><code>library(Lahman)
+library(sqldf)</code></pre>
+<pre><code>## Loading required package: gsubfn</code></pre>
+<pre><code>## Loading required package: proto</code></pre>
+<pre><code>## Loading required package: RSQLite</code></pre>
+<pre class="r"><code>library(RSQLite)
+#Data visulization scatter plots
+#extracting Data 
+query &lt;- &quot;SELECT playerID, sum(HR) AS Career_HR, sum(SO) AS Career_SO
+FROM Batting 
+GROUP BY playerID 
+HAVING sum(HR)&gt;=400&quot;
+
+
+
+sqldf(query)</code></pre>
+<pre><code>##     playerID Career_HR Career_SO
+## 1  aaronha01       755      1383
+## 2  bagweje01       449      1558
+## 3  bankser01       512      1236
+## 4  beltrad01       445      1584
+## 5  beltrca01       421      1693
+## 6  bondsba01       762      1539
+## 7  cabremi01       446      1516
+## 8  cansejo01       462      1942
+## 9  dawsoan01       438      1509
+## 10 delgaca01       473      1745
+## 11  dunnad01       462      2379
+## 12 evansda01       414      1410
+## 13  foxxji01       534      1311
+## 14 gehrilo01       493       790
+## 15 giambja01       440      1572
+## 16 gonzaju03       434      1273
+## 17 griffke02       630      1779
+## 18 guerrvl01       449       985
+## 19 jacksre01       563      2597
+## 20 jonesan01       434      1748
+## 21 jonesch06       468      1409
+## 22 killeha01       573      1699
+## 23 kingmda01       442      1816
+## 24 konerpa01       439      1391
+## 25 mantlmi01       536      1710
+## 26 matheed01       512      1487
+## 27  mayswi01       660      1526
+## 28 mccovwi01       521      1550
+## 29 mcgrifr01       493      1882
+## 30 mcgwima01       583      1596
+## 31 murraed02       504      1516
+## 32 musiast01       475       696
+## 33 ortizda01       541      1750
+## 34   ottme01       511       896
+## 35 palmera01       569      1348
+## 36 piazzmi01       427      1113
+## 37 pujolal01       591      1053
+## 38 ramirma02       555      1813
+## 39 ripkeca01       431      1305
+## 40 robinfr02       586      1532
+## 41 rodrial01       696      2287
+## 42  ruthba01       714      1330
+## 43 schmimi01       548      1883
+## 44 sheffga01       509      1171
+## 45 snidedu01       407      1237
+## 46 soriaal01       412      1803
+## 47  sosasa01       609      2306
+## 48 stargwi01       475      1936
+## 49 teixema01       409      1441
+## 50 thomafr04       521      1397
+## 51 thomeji01       612      2548
+## 52 willibi01       426      1046
+## 53 willite01       521       709
+## 54 winfida01       465      1686
+## 55 yastrca01       452      1393</code></pre>
+<pre class="r"><code>plotdf &lt;- data.frame(sqldf(query))</code></pre>
+<p>We then can begin using ggplot to create our visualizations. There are three main componets to ggplot: data, geometery and aesthetics.</p>
+<pre class="r"><code>library(ggplot2)
+str(plotdf)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    55 obs. of  3 variables:
+##  $ playerID : chr  &quot;aaronha01&quot; &quot;bagweje01&quot; &quot;bankser01&quot; &quot;beltrad01&quot; ...
+##  $ Career_HR: int  755 449 512 445 421 762 446 462 438 473 ...
+##  $ Career_SO: int  1383 1558 1236 1584 1693 1539 1516 1942 1509 1745 ...</code></pre>
+<pre class="r"><code>plot1 &lt;- ggplot(data=plotdf, aes(x=Career_SO, y=Career_HR, label=playerID)) + 
+  geom_point()+
+  geom_text(aes(label=playerID),hjust=0, vjust=0)+
+  ggtitle(&quot;Career Homeruns VS Career Strikeouts for Great Hitters&quot;)+
+  xlab(&quot;Career Strikeouts&quot;)+
+  ylab(&quot;Career Home Runs&quot;)
+plot1</code></pre>
+<p><img src="/post/2017-12-12-data-viz_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>We also can make histrograms.</p>
+<pre class="r"><code>#Histogram ggplot
+
+#Extracting Data
+query2 &lt;- &quot;SELECT weight FROM Master&quot;
+plotdf_2&lt;-sqldf(query2)
+
+#Data Viz
+
+plot2 &lt;- ggplot()+
+  geom_histogram(data=plotdf_2, aes(x=weight), color=&quot;red&quot;, fill=&quot;white&quot;)+
+  ggtitle(&quot;Ball Player Bodyweight Distribution&quot;)
+plot2</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 854 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="/post/2017-12-12-data-viz_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>We also can create times series analysis using ggplot as well.</p>
+<pre class="r"><code>#Time Series Plot for the Great Bambino 
+
+#Extracting Data
+query3 &lt;- &quot;select yearID, HR from Batting
+where playerID=&#39;ruthba01&#39;&quot;
+
+plotdf_3&lt;-sqldf(query3)
+
+#Data Viz 
+
+plot3 &lt;- ggplot()+
+  geom_line(data=plotdf_3, aes(x=yearID, y=HR),color=&#39;blue&#39;)+
+  geom_point(data=plotdf_3, aes(x=yearID, y=HR),color=&#39;red&#39;)+
+  ggtitle(&quot;The Sultan of Swat&#39;s Homerun Blasts Through the Years&quot;)+
+  xlab(&quot;Year&quot;)+
+  ylab(&quot;Homerun Blasts&quot;)
+plot3</code></pre>
+<p><img src="/post/2017-12-12-data-viz_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Using ggplot we can also create bar plots as well.</p>
+<pre class="r"><code>#barplot
+#extracting the data
+colnames(Teams)</code></pre>
+<pre><code>##  [1] &quot;yearID&quot;         &quot;lgID&quot;           &quot;teamID&quot;         &quot;franchID&quot;      
+##  [5] &quot;divID&quot;          &quot;Rank&quot;           &quot;G&quot;              &quot;Ghome&quot;         
+##  [9] &quot;W&quot;              &quot;L&quot;              &quot;DivWin&quot;         &quot;WCWin&quot;         
+## [13] &quot;LgWin&quot;          &quot;WSWin&quot;          &quot;R&quot;              &quot;AB&quot;            
+## [17] &quot;H&quot;              &quot;X2B&quot;            &quot;X3B&quot;            &quot;HR&quot;            
+## [21] &quot;BB&quot;             &quot;SO&quot;             &quot;SB&quot;             &quot;CS&quot;            
+## [25] &quot;HBP&quot;            &quot;SF&quot;             &quot;RA&quot;             &quot;ER&quot;            
+## [29] &quot;ERA&quot;            &quot;CG&quot;             &quot;SHO&quot;            &quot;SV&quot;            
+## [33] &quot;IPouts&quot;         &quot;HA&quot;             &quot;HRA&quot;            &quot;BBA&quot;           
+## [37] &quot;SOA&quot;            &quot;E&quot;              &quot;DP&quot;             &quot;FP&quot;            
+## [41] &quot;name&quot;           &quot;park&quot;           &quot;attendance&quot;     &quot;BPF&quot;           
+## [45] &quot;PPF&quot;            &quot;teamIDBR&quot;       &quot;teamIDlahman45&quot; &quot;teamIDretro&quot;</code></pre>
+<pre class="r"><code>query4 &lt;- &#39;select name, HR from Teams
+where yearID=1980
+order by HR&#39;
+plotdf_4 &lt;- sqldf(query4)
+
+#makeing the barplot 
+
+plotdf_4$name&lt;-factor(plotdf_4$name, levels=plotdf_4$name)
+
+
+plot4 &lt;- ggplot(data=plotdf_4, aes(x=name, y=HR, fill=HR))+
+  geom_bar(stat=&#39;identity&#39;)+
+  xlab(&#39;Homeruns&#39;)+
+  ylab(&#39;Team Names&#39;)+
+  ggtitle(&#39;1980 Team Homerun Distribution&#39;)+
+  coord_flip()
+  
+plot4</code></pre>
+<p><img src="/post/2017-12-12-data-viz_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>

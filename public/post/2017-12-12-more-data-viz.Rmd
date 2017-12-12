@@ -1,0 +1,9 @@
+---
+title: 'More Data Viz '
+author: Chris Smith
+date: '2017-12-12'
+slug: more-data-viz
+categories: []
+tags: []
+---
+

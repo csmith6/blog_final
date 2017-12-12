@@ -1,0 +1,9 @@
+---
+title: 'Bar Plots '
+author: Chris Smith
+date: '2017-12-12'
+slug: bar-plots
+categories: []
+tags: []
+---
+

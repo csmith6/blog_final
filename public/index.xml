@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Minimal</title>
+    <link>/</link>
+    <description>Recent content on Minimal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 12 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Project 1</title>
+      <link>/project/project1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Project 2</title>
+      <link>/project/project2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Project 3</title>
+      <link>/project/project3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Project 4</title>
+      <link>/project/project4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Viz</title>
+      <link>/post/data-viz/</link>
+      <pubDate>Tue, 12 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/data-viz/</guid>
+      <description>In R we can create cool data visualizations that represent data in an easy and communicative way. First, we must qurey our data into dataframes with sqldf().
+library(Lahman)library(sqldf)## Loading required package: gsubfn## Loading required package: proto## Loading required package: RSQLitelibrary(RSQLite)#Data visulization scatter plots#extracting Data query &amp;lt;- &amp;quot;SELECT playerID, sum(HR) AS Career_HR, sum(SO) AS Career_SOFROM Batting GROUP BY playerID HAVING sum(HR)&amp;gt;=400&amp;quot;sqldf(query)## playerID Career_HR Career_SO## 1 aaronha01 755 1383## 2 bagweje01 449 1558## 3 bankser01 512 1236## 4 beltrad01 445 1584## 5 beltrca01 421 1693## 6 bondsba01 762 1539## 7 cabremi01 446 1516## 8 cansejo01 462 1942## 9 dawsoan01 438 1509## 10 delgaca01 473 1745## 11 dunnad01 462 2379## 12 evansda01 414 1410## 13 foxxji01 534 1311## 14 gehrilo01 493 790## 15 giambja01 440 1572## 16 gonzaju03 434 1273## 17 griffke02 630 1779## 18 guerrvl01 449 985## 19 jacksre01 563 2597## 20 jonesan01 434 1748## 21 jonesch06 468 1409## 22 killeha01 573 1699## 23 kingmda01 442 1816## 24 konerpa01 439 1391## 25 mantlmi01 536 1710## 26 matheed01 512 1487## 27 mayswi01 660 1526## 28 mccovwi01 521 1550## 29 mcgrifr01 493 1882## 30 mcgwima01 583 1596## 31 murraed02 504 1516## 32 musiast01 475 696## 33 ortizda01 541 1750## 34 ottme01 511 896## 35 palmera01 569 1348## 36 piazzmi01 427 1113## 37 pujolal01 591 1053## 38 ramirma02 555 1813## 39 ripkeca01 431 1305## 40 robinfr02 586 1532## 41 rodrial01 696 2287## 42 ruthba01 714 1330## 43 schmimi01 548 1883## 44 sheffga01 509 1171## 45 snidedu01 407 1237## 46 soriaal01 412 1803## 47 sosasa01 609 2306## 48 stargwi01 475 1936## 49 teixema01 409 1441## 50 thomafr04 521 1397## 51 thomeji01 612 2548## 52 willibi01 426 1046## 53 willite01 521 709## 54 winfida01 465 1686## 55 yastrca01 452 1393plotdf &amp;lt;- data.</description>
+    </item>
+    
+    <item>
+      <title>More Data Viz </title>
+      <link>/post/more-data-viz/</link>
+      <pubDate>Tue, 12 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/more-data-viz/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
